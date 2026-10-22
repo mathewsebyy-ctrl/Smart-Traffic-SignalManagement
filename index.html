@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Traffic Control | Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">✦</span><div><strong>SMARTFLOW</strong><small>TRAFFIC MANAGEMENT SIMULATOR</small></div></div>
+    <div class="status-pill"><span class="pulse"></span> SIMULATION MODE</div>
+  </header>
+  <main class="layout">
+    <section class="intro">
+      <div class="eyebrow">INTELLIGENT INTERSECTION SYSTEM</div>
+      <h1>Traffic that moves<br><span>with purpose.</span></h1>
+      <p>Explore adaptive signal timing, live vehicle queues, and emergency vehicle prioritization at a four-way intersection.</p>
+      <div class="intro-tags"><span>Queue-based timing</span><span>Emergency priority</span><span>Live statistics</span></div>
+    </section>
+
+    <section class="dashboard">
+      <div class="section-head"><div><div class="eyebrow">CONTROL CENTRE</div><h2>Intersection overview</h2></div><span class="live"><i></i> LIVE DEMO</span></div>
+      <div class="metrics">
+        <article class="metric"><span>Vehicles processed</span><strong id="processed">0</strong><small>Since simulation start</small></article>
+        <article class="metric"><span>Vehicles waiting</span><strong id="waiting">24</strong><small>Across all approaches</small></article>
+        <article class="metric"><span>Avg. wait estimate</span><strong><b id="avgWait">18</b><em> sec</em></strong><small>Illustrative estimate</small></article>
+      </div>
+      <div class="main-grid">
+        <div class="intersection-panel">
+          <div class="panel-title"><div><h3>Four-way intersection</h3><p>Tap a road to add traffic</p></div><span id="phaseLabel" class="phase-label">NORTH / SOUTH GREEN</span></div>
+          <div class="intersection" id="intersection">
+            <div class="road road-v"></div><div class="road road-h"></div>
+            <div class="lane-mark lane-v1"></div><div class="lane-mark lane-v2"></div><div class="lane-mark lane-h1"></div><div class="lane-mark lane-h2"></div>
+            <div class="crosswalk cw-top"></div><div class="crosswalk cw-bottom"></div><div class="crosswalk cw-left"></div><div class="crosswalk cw-right"></div>
+            <div class="road-label north">NORTH <b id="nCount">6</b></div><div class="road-label south">SOUTH <b id="sCount">5</b></div>
+            <div class="road-label east">EAST <b id="eCount">7</b></div><div class="road-label west">WEST <b id="wCount">6</b></div>
+            <div class="light light-n" id="lightN"><span></span><span></span><span></span></div>
+            <div class="light light-s" id="lightS"><span></span><span></span><span></span></div>
+            <div class="light light-e" id="lightE"><span></span><span></span><span></span></div>
+            <div class="light light-w" id="lightW"><span></span><span></span><span></span></div>
+            <div class="center-mark"><span>SF</span></div>
+            <button class="road-add add-n" data-road="N">+ Add</button><button class="road-add add-s" data-road="S">+ Add</button>
+            <button class="road-add add-e" data-road="E">+ Add</button><button class="road-add add-w" data-road="W">+ Add</button>
+            <div class="emergency-banner" id="emergencyBanner">🚑 Emergency priority active</div>
+          </div>
+          <div class="legend"><span><i class="dot green"></i> Green: moving</span><span><i class="dot amber"></i> Amber: changing</span><span><i class="dot red"></i> Red: waiting</span></div>
+        </div>
+        <aside class="side-panel">
+          <div class="panel-title"><div><h3>Signal controls</h3><p>Adjust the simulation</p></div></div>
+          <label class="toggle-row"><span><b>Adaptive timing</b><small>Give longer green to busier roads</small></span><input id="adaptiveToggle" type="checkbox" checked><i class="switch"></i></label>
+          <label class="toggle-row"><span><b>Emergency vehicle</b><small>Request priority for a road</small></span><input id="emergencyToggle" type="checkbox"><i class="switch"></i></label>
+          <label class="field-label" for="emergencyRoad">Emergency vehicle approach</label>
+          <select id="emergencyRoad"><option value="N">North road</option><option value="S">South road</option><option value="E">East road</option><option value="W">West road</option></select>
+          <button class="primary-btn" id="runBtn">▶ &nbsp; Run simulation</button>
+          <button class="secondary-btn" id="stepBtn">↻ &nbsp; Process one signal phase</button>
+          <button class="reset-btn" id="resetBtn">Reset demo</button>
+          <div class="algorithm-note"><span>✧</span><div><b>How it decides</b><p>Road queues are compared to choose a suitable green phase. Emergency requests can temporarily receive priority. Conflicting directions are never shown green together.</p></div></div>
+        </aside>
+      </div>
+      <div class="bottom-grid">
+        <div class="queue-panel">
+          <div class="panel-title"><div><h3>Road queue status</h3><p>Vehicles waiting on each approach</p></div><span class="small-chip">FIFO queues</span></div>
+          <div id="queueRows" class="queue-rows"></div>
+        </div>
+        <div class="activity-panel">
+          <div class="panel-title"><div><h3>Activity log</h3><p>Latest simulation events</p></div><button id="clearLog" class="text-btn">Clear</button></div>
+          <div id="activityLog" class="activity-log"><div class="log-entry"><span class="log-time">READY</span><span>Simulation initialized with four road queues.</span></div></div>
+        </div>
+      </div>
+      <div class="disclaimer">EDUCATIONAL PROTOTYPE · Simulated values only. This website does not control real traffic signals or provide validated emergency routing.</div>
+    </section>
+  </main>
+  <footer>SMARTFLOW <span>•</span> Data structures in action — queues, priority scheduling, and adaptive timing.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
